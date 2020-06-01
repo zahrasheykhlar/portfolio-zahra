@@ -83,7 +83,7 @@ class Index extends SuperComponent {
 		const {userData , initialData} = this.props;
 	    return (
 	    	<BaseLayout  title ='test2'>
-		    	<h1>I am a page from Class Component</h1>
+		    	<h1>I am a page from Class Component, and was updated!!!</h1>
 		    	<h2>{title}</h2>
 		    	<h2>{userData.title}</h2>
 		    	<button onClick={() => this.updateTitle()}>Change title</button>
