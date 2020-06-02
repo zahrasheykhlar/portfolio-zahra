@@ -15,13 +15,7 @@ class Header extends React.Component
 
 		return(
         <div>
-        <p> { title } </p>
-        <div> {this.props.children} </div>
-
-		<p className= 'customClass'>I am styled p element</p>
-	    <p className= 'customClassFromFile' >I am styled p element </p>
-  <Button /> 
-  <br/>
+ 
             <Link href="/">
 	        	<a style={{'fontSize':'30px'}}> Home </a>
 	    	</Link>
