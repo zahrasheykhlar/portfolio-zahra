@@ -16,12 +16,12 @@ const BasePage = (props) => {
 			</div>
 		)
 }
-// BasePage.defaultProps = {
-// 	className:''
-// }
-
-BasePage.propTypes= {
-	className: PropTypes.any.isRequired
+BasePage.defaultProps = {
+	className:''
 }
+
+// BasePage.propTypes= {
+// 	className: PropTypes.any.isRequired
+// }
 
 export default BasePage;

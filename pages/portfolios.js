@@ -38,12 +38,12 @@ static async getInitialProps()
   	const { posts } = this.props;
     return (
     	<BaseLayout>
-    	<BasePage>
-	    	<h1>I am Portfolios page</h1>
-	    	<ul>
-	    		{this.renderPosts(posts)}
-	    	</ul>
-	    </BasePage>
+	    	<BasePage>
+		    	<h1>I am Portfolios page</h1>
+		    	<ul>
+		    		{this.renderPosts(posts)}
+		    	</ul>
+		    </BasePage>
 	    </BaseLayout>
     	)
   	}

@@ -61,6 +61,16 @@ const BSNavLink = (props) => {
 		)
 }
 
+const Login = () => {
+  return(
+      <span className="nav-link port-navbar-link clickable">Login</span>
+    )
+}
+const Logout = () => {
+  return(
+      <span className="nav-link port-navbar-link clickable">Logout</span>
+    )
+}
 
 const Example = (props) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -69,7 +79,7 @@ const Example = (props) => {
 
   return (
     <div>
-      <Navbar className="port-navbarport-default absolute" color="transparent" light>
+      <Navbar className="port-navbarport-default absolute" color="transparent" light >
         <NavbarBrand className="port-navbar-brand" href="/" className="mr-auto">Zahra Sheykhlar</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
@@ -88,6 +98,12 @@ const Example = (props) => {
             </NavItem>
             <NavItem className="port-navbar-item">
           		<BSNavLink route="/cv" title="CV" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+             <Login />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <Logout /> 
             </NavItem>
           </Nav>
         </Collapse>

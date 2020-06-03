@@ -6,9 +6,9 @@ class Blogs extends React.Component {
   render() {
     return (
     	<BaseLayout>
-    	 <BasePage>
-		     <h1>I am Blogs page</h1>
-		 </BasePage>
+    		 <BasePage>
+		 	    <h1>I am Blogs page</h1>
+			 </BasePage>
 		</BaseLayout>
      )
   }

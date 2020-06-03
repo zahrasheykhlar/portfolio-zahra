@@ -17,7 +17,7 @@ class Test extends React.Component {
     return(
     	<BaseLayout>
 		     <h1>I am test page with Id of {testId}</h1>
-		</BaseLayout>
+		  </BaseLayout>
      )
   }
 }
