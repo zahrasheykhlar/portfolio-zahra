@@ -51,6 +51,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import auth0 from '../../services/auth0';
 
 const BSNavLink = (props) => {
 	const {route, title} = props;
@@ -63,7 +64,7 @@ const BSNavLink = (props) => {
 
 const Login = () => {
   return(
-      <span className="nav-link port-navbar-link clickable">Login</span>
+      <span onClick={auth0.login} className="nav-link port-navbar-link clickable">Login</span>
     )
 }
 const Logout = () => {
