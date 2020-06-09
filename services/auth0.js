@@ -5,12 +5,36 @@ class Auth0 {
 		this.auth0 = new auth0.WebAuth({
 		domain: 'dev-77j5uxtc.auth0.com',
 		clientID: 't5psAEctDvTi2NJCh86Jzzq0t6qIDWmd',
-		redirectUrl: 'http://localhost:3000/callback',
+		redirectUri: 'http://localhost:3000/callback',
 		responseType:'token id_token',
 		scope: 'openid profile'
 		});
 		this.login = this.login.bind(this);
+		this.handleAuthentication = this.handleAuthentication.bind(this);
 	}
+
+    handleAuthentication() {
+    	
+		 	console.log("1");
+    	return new Promise((resolve, reject) => {
+    		      this.auth0.parseHash((err, authResult) => {
+			        if (authResult && authResult.accessToken && authResult.idToken) {
+			        	   console.log(authResult);
+			          this.setSession(authResult);
+			          resolve();
+			        } else if (err) {
+			          reject(err);
+			          console.log(err);
+			        }
+      });
+   
+    	})
+ 
+    }
+
+    setSession() {
+    	//save Tokens
+    }
 
 	login(){
 		this.auth0.authorize();
