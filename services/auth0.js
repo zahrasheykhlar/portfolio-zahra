@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js'
+import Cookies from 'js-cookie'
 
 class Auth0 {
 	constructor(){
@@ -10,12 +11,12 @@ class Auth0 {
 		scope: 'openid profile'
 		});
 		this.login = this.login.bind(this);
+		this.logout = this.logout.bind(this);
 		this.handleAuthentication = this.handleAuthentication.bind(this);
+		this.isAuthenticated = this.isAuthenticated.bind(this);
 	}
 
     handleAuthentication() {
-    	
-		 	console.log("1");
     	return new Promise((resolve, reject) => {
     		      this.auth0.parseHash((err, authResult) => {
 			        if (authResult && authResult.accessToken && authResult.idToken) {
@@ -32,12 +33,34 @@ class Auth0 {
  
     }
 
-    setSession() {
-    	//save Tokens
-    }
+    setSession(authResult) {
+    debugger;
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+
+    Cookies.set('user', authResult.idTokenPayLoad);
+    Cookies.set('jwt', authResult.idToken);
+    Cookies.set('expiresAt', expiresAt);
+  	}
+
+  	logout(){
+	  	Cookies.remove('user');
+	    Cookies.remove('jwt');
+	    Cookies.remove('expiresAt');
+
+	    this.auth0.logout({
+	    returnTo: '/'	,
+	    clientID: 't5psAEctDvTi2NJCh86Jzzq0t6qIDWmd'
+	    })
+  	}
 
 	login(){
 		this.auth0.authorize();
+	}
+
+	isAuthenticated()
+	{
+		const expiresAt = Cookies.getJson('expiresAt');
+		return new Date().getTime() < expiresAt;
 	}
 }
 

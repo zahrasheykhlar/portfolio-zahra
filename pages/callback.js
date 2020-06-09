@@ -6,8 +6,7 @@ import { withRouter } from 'next/router';
 
 class Callback extends React.Component {
   async componentDidMount(){
-  	console.log("hiiiiiiiiiiiiiii");
-  	await auth0Client.handleAuthentication();
+   	await auth0Client.handleAuthentication();
   	this.props.router.push('/');
   }	
   render() {
