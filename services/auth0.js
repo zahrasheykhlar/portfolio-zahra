@@ -48,7 +48,7 @@ class Auth0 {
 	    Cookies.remove('expiresAt');
 
 	    this.auth0.logout({
-	    returnTo: '/'	,
+	    returnTo: ''	,
 	    clientID: 't5psAEctDvTi2NJCh86Jzzq0t6qIDWmd'
 	    })
   	}
@@ -59,7 +59,7 @@ class Auth0 {
 
 	isAuthenticated()
 	{
-		const expiresAt = Cookies.getJson('expiresAt');
+		const expiresAt = Cookies.getJSON('expiresAt');
 		return new Date().getTime() < expiresAt;
 	}
 }

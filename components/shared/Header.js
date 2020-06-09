@@ -69,7 +69,7 @@ const Login = () => {
 }
 const Logout = () => {
   return(
-      <span className="nav-link port-navbar-link clickable">Logout</span>
+      <span  onClick={auth0.logout} className="nav-link port-navbar-link clickable">Logout</span>
     )
 }
 
@@ -100,12 +100,16 @@ const Example = (props) => {
             <NavItem className="port-navbar-item">
           		<BSNavLink route="/cv" title="CV" />
             </NavItem>
-            <NavItem className="port-navbar-item">
-             <Login />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <Logout /> 
-            </NavItem>
+            { !auth0.isAuthenticated() &&
+              <NavItem className="port-navbar-item">
+               <Login />
+              </NavItem>
+            }
+            {  auth0.isAuthenticated() &&
+              <NavItem className="port-navbar-item">
+                <Logout /> 
+              </NavItem>
+            }
           </Nav>
         </Collapse>
       </Navbar>
