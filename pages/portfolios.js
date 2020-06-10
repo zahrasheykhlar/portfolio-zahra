@@ -37,7 +37,7 @@ static async getInitialProps()
 	render() {
   	const { posts } = this.props;
     return (
-    	<BaseLayout>
+    	<BaseLayout {...this.props.auth}>
 	    	<BasePage>
 		    	<h1>I am Portfolios page</h1>
 		    	<ul>

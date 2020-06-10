@@ -19,7 +19,8 @@ export default class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
 
-    return { pageProps }
+    const auth = {isAuthenticated};
+    return { pageProps, auth }
   }
 
   // state = {
@@ -27,11 +28,11 @@ export default class MyApp extends App {
   // }
 
   render () {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, auth } = this.props
 
     return (
       <Container>
-        <Component {...pageProps} {...this.state}/>
+        <Component {...pageProps} {...this.state}  auth = {auth}/>
       </Container>
     )
   }

@@ -73,11 +73,11 @@ const Logout = () => {
     )
 }
 
-const Example = (props) => {
+const Header = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-
+  const {isAuthenticated} = props;
   return (
     <div>
       <Navbar className="port-navbarport-default absolute" color="transparent" light >
@@ -100,12 +100,12 @@ const Example = (props) => {
             <NavItem className="port-navbar-item">
           		<BSNavLink route="/cv" title="CV" />
             </NavItem>
-            { !auth0.isAuthenticated() &&
+            { !isAuthenticated &&
               <NavItem className="port-navbar-item">
                <Login />
               </NavItem>
             }
-            {  auth0.isAuthenticated() &&
+            { isAuthenticated &&
               <NavItem className="port-navbar-item">
                 <Logout /> 
               </NavItem>
@@ -117,4 +117,4 @@ const Example = (props) => {
   );
 }
 
-export default Example;
+export default Header;
