@@ -14,7 +14,7 @@ class Auth0 {
 		this.login = this.login.bind(this);
 		this.logout = this.logout.bind(this);
 		this.handleAuthentication = this.handleAuthentication.bind(this);
-		this.isAuthenticated = this.isAuthenticated.bind(this);
+		
 	}
 
     handleAuthentication() {
@@ -35,7 +35,6 @@ class Auth0 {
     }
 
     setSession(authResult) {
-    debugger;
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
 
     Cookies.set('user', authResult.idTokenPayLoad);
@@ -58,12 +57,6 @@ class Auth0 {
 		this.auth0.authorize();
 	}
 
-	isAuthenticated()
-	{
-		const expiresAt = Cookies.getJSON('expiresAt');
-		return new Date().getTime() < expiresAt;
-	}
-
 	vefiryToken(token)
 	{
 		if(token)
@@ -78,7 +71,7 @@ class Auth0 {
 
 	clientAuth(){
 		const token = Cookies.getJSON('jwt');
-		const verifyedToken = this.verifyedToken(token);
+		const verifyedToken = this.vefiryToken(token);
 
 		return verifiedToken;
 	}
