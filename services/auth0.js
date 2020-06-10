@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js'
 import Cookies from 'js-cookie'
+import jwt from 'jsonwebtoken'
 
 class Auth0 {
 	constructor(){
@@ -63,18 +64,36 @@ class Auth0 {
 		return new Date().getTime() < expiresAt;
 	}
 
+	vefiryToken(token)
+	{
+		if(token)
+		{
+			const decodedToken = jwt.decode(token);
+			const expiresAt = decodedToken.exp * 1000;
+
+			return (decodedToken && new Date().getTime() <expiresAt) ? decodedToken : undefined;
+		}
+		return undefined;
+	}
+
 	clientAuth(){
-		return this.isAuthenticated();
+		const token = Cookies.getJSON('jwt');
+		const verifyedToken = this.verifyedToken(token);
+
+		return verifiedToken;
 	}
 
 	serverAuth(req){
 		if(req.headers.cookie){
-			const expiresAtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('expiresAt='));
-			if(!expiresAtCookie){ return undefined; }
+			const tokenCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='));
+			if(!tokenCookie){ return undefined; }
 
-			const expiresAt = expiresAtCookie.split('=')[1];
-			return new Date().getTime() < expiresAt;
+			const token = tokenCookie.split('=')[1];
+
+			const verifiedToken = this.vefiryToken(token);
+			return verifiedToken;
 		}
+		return undefined;
 	}
 }
 
