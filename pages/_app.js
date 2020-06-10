@@ -4,6 +4,7 @@ import App, { Container } from 'next/app';
 //Styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/main.scss';
+import auth0 from '../services/auth0'
 
 // export default function MyApp({ Component, pageProps }) {
 //   return <Component {...pageProps} />
@@ -12,7 +13,8 @@ import '../styles/main.scss';
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
-
+    console.log(ctx);
+    const isAuthenticated = process.browser ? auth0.clientAuth() : auth0.serverAuth(ctx.req);
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
