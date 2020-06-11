@@ -1,17 +1,30 @@
 const express = require('express')
 const next = require('next')
-const routes = require('./routes')
+const routes = require('../routes')
     
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 //const handle = app.getRequestHandler()
 const handle = routes.getRequestHandler(app)
 
+  const secretData =[
+  {
+    title: 'SecretData 1',
+    description: 'secret description 1'
+  },
+  {
+     title: 'SecretData 2',
+     description: 'secret description 2'
+  }
+  ]
     
 app.prepare()
 .then(() => {
   const server = express()
     
+  server.get('/api/v1/secret', (req , res) => {
+    return res.json(secretData)
+  })
   server.get('/portfolio/:id', (req, res) => {
   	console.log('/portfolio/:id')
   	const actualPage = '/portfolio';

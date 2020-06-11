@@ -22,7 +22,6 @@ class Auth0 {
     	return new Promise((resolve, reject) => {
     		      this.auth0.parseHash((err, authResult) => {
 			        if (authResult && authResult.accessToken && authResult.idToken) {
-			        	   console.log(authResult);
 			          this.setSession(authResult);
 			          resolve();
 			        } else if (err) {

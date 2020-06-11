@@ -15,7 +15,7 @@ class SuperComponent extends React.Component {
     return (
     	<BaseLayout>
 		     <h1>I am SuperComponent Component</h1>
-		</BaseLayout>
+	  	</BaseLayout>
      )
   }
 }
