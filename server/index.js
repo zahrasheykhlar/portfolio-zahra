@@ -1,7 +1,10 @@
 const express = require('express')
 const next = require('next')
 const routes = require('../routes')
-    
+
+//SERVICE
+const authServic = require('./services/auth')
+
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 //const handle = app.getRequestHandler()
@@ -17,12 +20,12 @@ const handle = routes.getRequestHandler(app)
      description: 'secret description 2'
   }
   ]
-    
+     
 app.prepare()
 .then(() => {
   const server = express()
     
-  server.get('/api/v1/secret', (req , res) => {
+  server.get('/api/v1/secret', authServic.checkJWT, (req , res) => {
     return res.json(secretData)
   })
   server.get('/portfolio/:id', (req, res) => {
@@ -36,6 +39,12 @@ app.prepare()
     return handle(req, res)
   })
     
+  server.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401).send({title: 'UnAuthorized', detail: 'UnAuthorized Access!'});
+    }
+  }); 
+
   server.listen(3000, (err) => {
     if (err) throw err
     console.log('> Ready on http://localhost:3000')
