@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js'
 import Cookies from 'js-cookie'
 import jwt from 'jsonwebtoken'
+import axios from 'axios'
 
 class Auth0 {
 	constructor(){
@@ -57,33 +58,60 @@ class Auth0 {
 		this.auth0.authorize();
 	}
 
-	vefiryToken(token)
+	async getJWKS(){
+		const res = await  axios.get('https://dev-77j5uxtc.auth0.com/.well-known/jwks.json');
+		const jwks = res.data; 
+		return jwks;
+	}
+
+	async vefiryToken(token)
 	{
 		if(token)
 		{
-			const decodedToken = jwt.decode(token);
-			const expiresAt = decodedToken.exp * 1000;
+			const decodedToken = jwt.decode(token, {complete: true});
+			const jwks = await this.getJWKS();
+			const jwk = jwks.keys[0];
+			
+			//BUILD CERTIFICATE
+			let cert = jwk.x5c[0];
+			cert = cert.match(/.{1,64}/g).join('\n');
+			cert = `-----BEGIN CERTIFICATE-----\n${cert}\n-----END CERTIFICATE-----\n`;
+			//
+console.log('jwk', jwk.kid);
+console.log('decodedToken', decodedToken.header.kid);
+			if (jwk.kid === decodedToken.header.kid){
+				try{
+					const verifiedToken = jwt.verify(token, cert)
+					const expiresAt = verifiedToken.exp * 1000;
+					return (verifiedToken && new Date().getTime() <expiresAt) ? verifiedToken : undefined;
+				}
+				catch(err)
+				{
+					return undefined;
+				}
+			}
 
-			return (decodedToken && new Date().getTime() <expiresAt) ? decodedToken : undefined;
+
+
 		}
 		return undefined;
 	}
 
-	clientAuth(){
+	async clientAuth(){
 		const token = Cookies.getJSON('jwt');
-		const verifyedToken = this.vefiryToken(token);
+		const verifiedToken = this.vefiryToken(token);
 
 		return verifiedToken;
 	}
 
-	serverAuth(req){
+	async serverAuth(req){
 		if(req.headers.cookie){
 			const tokenCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='));
 			if(!tokenCookie){ return undefined; }
 
 			const token = tokenCookie.split('=')[1];
 
-			const verifiedToken = this.vefiryToken(token);
+			const verifiedToken = await this.vefiryToken(token);
 			return verifiedToken;
 		}
 		return undefined;
