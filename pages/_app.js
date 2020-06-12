@@ -12,7 +12,6 @@ import auth0 from '../services/auth0'
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
-    console.log(ctx);
     const user = process.browser ? await auth0.clientAuth() : await auth0.serverAuth(ctx.req);
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
