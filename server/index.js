@@ -28,6 +28,11 @@ app.prepare()
   server.get('/api/v1/secret', authServic.checkJWT, (req , res) => {
     return res.json(secretData)
   })
+
+  server.get('/api/v1/onlysiteowner', authServic.checkJWT, authServic.checkRole('siteOwner'), (req , res) => {
+    return res.json(secretData)
+  })
+
   server.get('/portfolio/:id', (req, res) => {
   	console.log('/portfolio/:id')
   	const actualPage = '/portfolio';
