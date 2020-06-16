@@ -6,11 +6,13 @@ import {PropTypes} from 'prop-types';
 
 
 const BasePage = (props) => {
-	const {className} = props;
+	const {className, title} = props;
 	//const className = props.classname || '';
 	return (
 			<div className={`base-page ${className}`}>
 				<container>
+				{title && <div className="page-header"><h1 className="page-header-title">{title}</h1></div>}
+				
 				{props.children}
 				</container>
 			</div>

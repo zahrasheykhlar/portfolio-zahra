@@ -77,10 +77,10 @@ const Header = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const {isAuthenticated} = props;
+  const {isAuthenticated, className} = props;
   return (
     <div>
-      <Navbar className="port-navbarport-default absolute" color="transparent" light >
+      <Navbar className={`port-navbar port-nav-base absolute  ${className}`} color="transparent" light >
         <NavbarBrand className="port-navbar-brand" href="/" className="mr-auto">Zahra Sheykhlar</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
