@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Button, FormGroup, Label } from 'reactstrap';
 
 const validateInputs = (validate) => {
     const errors = {};
@@ -36,47 +37,47 @@ const PortfolioCreateForm = () => (
     >
       {({ isSubmitting }) => (
         <Form>
-          <div>
-            <label>title</label>
-            <Field type="text" name="title" />
+          <FormGroup>
+            <Label>title</Label>
+            <Field className="form-control" type="text" name="title" />
             <ErrorMessage name="title" component="div" />
-          </div>
+          </FormGroup>
 
-          <div>
-            <label>company</label>
-            <Field type="text" name="company" />
+          <FormGroup>
+            <Label>company</Label>
+            <Field className="form-control" type="text" name="company" />
             <ErrorMessage name="company" component="div" />
-          </div>
+          </FormGroup>
 
-          <div>
-            <label>location</label>
-            <Field type="text" name="location" />
+          <FormGroup>
+            <Label>location</Label>
+            <Field className="form-control" type="text" name="location" />
             <ErrorMessage name="location" component="div" />
-          </div>
+          </FormGroup>
 
-          <div>
-            <label>position</label>
-            <Field type="text" name="position" />
+          <FormGroup>
+            <Label>position</Label>
+            <Field className="form-control" type="text" name="position" />
             <ErrorMessage name="position" component="div" />
-          </div>
+          </FormGroup>
 
-          <div>
-            <label>description</label>
-            <Field type="textarea" name="description" component="textarea" />
+          <FormGroup>
+            <Label>description</Label>
+            <Field className="form-control" type="textarea" name="description" component="textarea" />
             <ErrorMessage name="description" component="div" />
-          </div>
+          </FormGroup>
 
-          <div>
-            <label>startDate</label>
-            <Field type="text" name="startDate" />
+          <FormGroup>
+            <Label>startDate</Label>
+            <Field className="form-control" type="text" name="startDate" />
             <ErrorMessage name="startDate" component="div" />
-          </div>
+          </FormGroup>
 
-          <div>
-            <label>endDate</label>
-            <Field type="text" name="endDate" />
+          <FormGroup>
+            <Label>endDate</Label>
+            <Field className="form-control" type="text" name="endDate" />
             <ErrorMessage name="endDate" component="div" />
-          </div>
+          </FormGroup>
 
           <button type="submit" disabled={isSubmitting}>
             Submit
