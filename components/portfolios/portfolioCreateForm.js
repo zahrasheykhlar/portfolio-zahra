@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, FormGroup, Label } from 'reactstrap';
+import PortInput from '../form/PortInput';
 
 const validateInputs = (validate) => {
     const errors = {};
@@ -37,47 +38,34 @@ const PortfolioCreateForm = () => (
     >
       {({ isSubmitting }) => (
         <Form>
-          <FormGroup>
-            <Label>title</Label>
-            <Field className="form-control" type="text" name="title" />
-            <ErrorMessage name="title" component="div" />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>company</Label>
-            <Field className="form-control" type="text" name="company" />
-            <ErrorMessage name="company" component="div" />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>location</Label>
-            <Field className="form-control" type="text" name="location" />
-            <ErrorMessage name="location" component="div" />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>position</Label>
-            <Field className="form-control" type="text" name="position" />
-            <ErrorMessage name="position" component="div" />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>description</Label>
-            <Field className="form-control" type="textarea" name="description" component="textarea" />
-            <ErrorMessage name="description" component="div" />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>startDate</Label>
-            <Field className="form-control" type="text" name="startDate" />
-            <ErrorMessage name="startDate" component="div" />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>endDate</Label>
-            <Field className="form-control" type="text" name="endDate" />
-            <ErrorMessage name="endDate" component="div" />
-          </FormGroup>
+            <Field type="text" 
+                   name="title" 
+                   label="Title"
+                   component={PortInput}/>
+            <Field type="text" 
+                   name="company" 
+                   label="Company"
+                   component={PortInput}/>
+            <Field type="text" 
+                   name="location"
+                   label="Location"
+                   component={PortInput}/>
+            <Field type="text" 
+                   name="position"
+                   label="Position" 
+                   component={PortInput}/>
+            <Field type="textarea" 
+                   name="description" 
+                   label="Description"
+                   component={PortInput}/>
+            <Field type="text" 
+                   name="startDate"
+                   label="StartDate"
+                   component={PortInput}/>
+            <Field type="text" 
+                   name="endDate"
+                   label="EndDate"
+                   component={PortInput}/>
 
           <button type="submit" disabled={isSubmitting}>
             Submit
