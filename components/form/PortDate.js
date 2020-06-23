@@ -17,12 +17,23 @@ export default class PortDate extends React.Component {
   };
 
   render() {
+    const { label } = this.props;
     return (
+    
       <FormGroup>
-        <DatePicker
-          selected={this.state.dateValue}
-          onChange={this.handleChange}
-        />
+        <Label>{label}</Label>
+        <div className="input-group">
+          <DatePicker
+            className = "form-control"
+            selected={this.state.dateValue}
+            onChange={this.handleChange}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            maxDate = {moment()}
+            dropdownMode = "select"
+          />
+        </div>
       </FormGroup>
     );
   }
