@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, FormGroup, Label } from 'reactstrap';
 import PortInput from '../form/PortInput';
+import PortDate from '../form/PortDate';
 
 const validateInputs = (values) => {
     const errors = {};
@@ -58,14 +59,12 @@ const PortfolioCreateForm = () => (
                    name="description" 
                    label="Description"
                    component={PortInput}/>
-            <Field type="text" 
-                   name="startDate"
+            <Field name="startDate"
                    label="StartDate"
-                   component={PortInput}/>
-            <Field type="text" 
-                   name="endDate"
+                   component={PortDate}/>
+            <Field name="endDate"
                    label="EndDate"
-                   component={PortInput}/>
+                   component={PortDate}/>
 
           <button type="submit" disabled={isSubmitting}>
             Submit

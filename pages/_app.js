@@ -4,7 +4,7 @@ import App, { Container } from 'next/app';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/main.scss';
 import auth0 from '../services/auth0'
-
+import "react-datepicker/dist/react-datepicker.css";
 // export default function MyApp({ Component, pageProps }) {
 //   return <Component {...pageProps} />
 // }
