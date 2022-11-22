@@ -34,7 +34,7 @@
     "jwks-rsa": "^1.8.0",
     "moment": "^2.27.0",
     "mongoose": "^5.3.12",
-    "next": "^9.3.5",
+    "next": "^13.0.4",
     "next-routes": "^1.4.2",
     "node-sass": "^4.9.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
